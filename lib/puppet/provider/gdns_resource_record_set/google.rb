@@ -29,9 +29,9 @@ require 'google/dns/network/delete'
 require 'google/dns/network/get'
 require 'google/dns/network/post'
 require 'google/dns/network/put'
-require 'google/dns/property/enum'
 require 'google/dns/property/integer'
 require 'google/dns/property/managedzone_name'
+require 'google/dns/property/resource_record_set_type'
 require 'google/dns/property/string'
 require 'google/dns/property/string_array'
 require 'google/hash_utils'
@@ -70,7 +70,7 @@ Puppet::Type.type(:gdns_resource_record_set).provide(:google) do
   def self.fetch_to_hash(fetch)
     {
       name: Google::Dns::Property::String.api_munge(fetch['name']),
-      type: Google::Dns::Property::Enum.api_munge(fetch['type']),
+      type: Google::Dns::Property::TypeEnum.api_munge(fetch['type']),
       ttl: Google::Dns::Property::Integer.api_munge(fetch['ttl']),
       target: Google::Dns::Property::StringArray.api_munge(fetch['rrdatas'])
     }.reject { |_, v| v.nil? }

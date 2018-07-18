@@ -25,9 +25,9 @@
 #
 # ----------------------------------------------------------------------------
 
-require 'google/dns/property/enum'
 require 'google/dns/property/integer'
 require 'google/dns/property/managedzone_name'
+require 'google/dns/property/resource_record_set_type'
 require 'google/dns/property/string'
 require 'google/dns/property/string_array'
 require 'puppet'
@@ -79,7 +79,7 @@ Puppet::Type.newtype(:gdns_resource_record_set) do
     desc 'For example, www.example.com.'
   end
 
-  newproperty(:type, parent: Google::Dns::Property::Enum) do
+  newproperty(:type, parent: Google::Dns::Property::TypeEnum) do
     desc 'One of valid DNS resource types.'
     newvalue(:A)
     newvalue(:AAAA)

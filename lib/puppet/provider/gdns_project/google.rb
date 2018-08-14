@@ -77,7 +77,11 @@ Puppet::Type.type(:gdns_project).provide(:google) do
     debug('flush')
     # return on !@dirty is for aiding testing (puppet already guarantees that)
     return if @created || @deleted || !@dirty
-    raise 'DNS Project cannot be edited' if @dirty
+    update_req = Google::Dns::Network::Put.new(self_link(@resource),
+                                               fetch_auth(@resource),
+                                               'application/json',
+                                               resource_to_request)
+    return_if_object update_req.send, 'dns#project'
   end
 
   def dirty(field, from, to)

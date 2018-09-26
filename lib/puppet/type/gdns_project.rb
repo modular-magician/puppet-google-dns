@@ -34,7 +34,6 @@ Puppet::Type.newtype(:gdns_project) do
     A project resource. The project is a top level container for resources including Cloud DNS
     ManagedZones.
   DOC
-
   autorequire(:gauth_credential) do
     credential = self[:credential]
     raise "#{ref}: required property 'credential' is missing" if credential.nil?

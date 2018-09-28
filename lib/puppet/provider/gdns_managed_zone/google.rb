@@ -118,6 +118,7 @@ Puppet::Type.type(:gdns_managed_zone).provide(:google) do
   end
 
   def exports
+    raise "Must fetch before accessing exported values." if @fetched.nil?
     {
       name: resource[:name]
     }
